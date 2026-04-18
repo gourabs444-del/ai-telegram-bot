@@ -1,25 +1,19 @@
 name: Daily Telegram Bot
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: '30 3 * * *'  # 9:00 AM IST
-  workflow_dispatch:     # manual run option bhi milega
+    - cron: '30 3 * * *'
 
 jobs:
   run-bot:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Install Node
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: 18
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run bot
-        run: node index.js
+      - run: node index.js
